@@ -40,4 +40,14 @@ Miguel Botero
 📧 mabotero0506@gmail.com
 🔗 GitHub: MiguelBotero
 
+---
+
+
+## ⚙️ Instalación y Ejecución
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/MiguelBotero/aloja.git
+
 

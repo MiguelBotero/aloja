@@ -2,37 +2,6 @@
 
 **Aloja** es un sistema de administración hotelera desarrollado con **PHP**, **MySQL** y **JavaScript**, diseñado para gestionar habitaciones, huéspedes, empleados, tarifas, pagos y más.
 
----
-
-## 📁 Estructura del Proyecto
-
-aloja/
-│
-├── administracion/ # Vistas y formularios del panel de administración
-│
-├── config/
-│ └── conexion.php # Conexión a la base de datos
-│
-├── css/ # Archivos de estilos personalizados
-│
-├── img/ # Imágenes usadas en la interfaz
-│
-├── js/
-│ └── init.js # Scripts JS (funciones, interacción, etc.)
-│
-├── php/ # Lógica del backend (CRUD)
-│ ├── empleado_CRUD/ # Acciones específicas de empleados
-│ ├── ... # Guardado y eliminación de datos
-│
-├── tablas/ # Vistas de datos (habitaciones, pagos, etc.)
-│
-├── ver/ # Archivos para visualizar datos filtrados
-│
-├── session.php # Gestión de sesión
-├── login.php # Login principal
-├── index.php # Página de inicio
-└── ubicacion.php # Vista de ubicación
-
 
 ---
 

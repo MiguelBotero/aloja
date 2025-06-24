@@ -25,199 +25,104 @@ $query = "SELECT * FROM habitacion $where_sql";
 $result = mysqli_query($conexion, $query);
 ?>
 
-
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bienvenido a Aloja</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/pagina5.css">
-
-    <style>
-
-      .titulo {
-          background-color: rgba(0, 0, 0, 0.289);
-        }
-
-      .titulo h3{
-        font-size: 105px;
-        color: white;
-      }
-            
-      .navegador{
-        background-color: rgba(0, 0, 0, 0.289);
-        height: 100%;
-    
-      }
-
-      li{
-          margin-left: 2px;
-          margin-bottom: 70px;
-      }
-      .nav-link{
-          color: rgb(255, 252, 246);
-      }
-      
-      .nav-link:hover{
-          background-color: rgba(55, 55, 230, 0.508);
-          color: white;
-      }
-      
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body>
-
-    <div class="text-center">
-        <div class="row">
-          <div class="col-12 titulo">
-            <h3>Bienvenido a Aloja</h3>
-          </div>
+  <body class="bg-gray-300 text-white">
+    <header class="bg-gradient-to-r from-gray-950 via-indigo-950 to-blue-950 shadow-2xl px-6 py-4">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <img class="w-24 h-24 p-2 object-cover rounded-full border-4 border-white shadow-md" src="img/aloja-removebg-preview.png" alt="Logo">
+          <h1 class="text-4xl font-extrabold tracking-wide text-indigo-100 drop-shadow-md">Bienvenido a Aloja </h1>
         </div>
-
-        <div class="row">
-          <div class="col-lg-2 col-12">
-            <ul class="nav d-flex flex-row flex-lg-column navegador">
-              <li class="nav-item">
-                <a class="nav-link" href="#">Inicio</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="galeria.php">Galería</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="ubicacion.php">Ubicación</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="nosotros.php">Nosotros</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="contactos.php">Contacto</a>
-              </li>
-
-              <li class="nav-item">
-                <a class="nav-link" href="sesion.php">Inicio de sesión</a>
-              </li>
-            </ul>
-          </div>
-          
-         
-          <div class="col-12 col-lg-8 mb-3 ">
-
-              <!-- FORMULARIO DE BÚSQUEDA (en la parte superior, no al lado) -->
-    
-              <div class=" mt-4 col-12 col-lg-12 mb-3">
-                <form method="GET">
-                  <div class="row g-3 justify-content-center">
-                    <div class="col-md-4">
-                      <input type="text" name="busqueda" class="form-control" placeholder="Buscar por nombre..." value="<?php echo isset($_GET['busqueda']) ? $_GET['busqueda'] : ''; ?>">
-                    </div>
-
-                    <div class="col-md-4">
-                      <select name="disponibilidad" class="form-select">
-                        <option value="">Todas las habitaciones</option>
-                        <option value="1" <?php if(isset($_GET['disponibilidad']) && $_GET['disponibilidad'] === "1") echo "selected"; ?>>Solo disponibles</option>
-                        <option value="0" <?php if(isset($_GET['disponibilidad']) && $_GET['disponibilidad'] === "0") echo "selected"; ?>>Solo no disponibles</option>
-                      </select>
-                    </div>
-
-                    <div class="col-md-2">
-                      <button type="submit" class="btn btn-primary w-100">Filtrar</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-    
-
-              <!-- Grid de habitaciones debajo del filtro -->
-              <div class="row  mt-4 habitaciones mb-3">
-                <?php while($row = mysqli_fetch_assoc($result)): ?>
-                  <div class="col-12 col-sm-6 col-md-4 mb-3">
-                    <div class="card habitacion1 text-white">
-                    <img src="img/<?php echo $row['imagen']; ?>" alt="Imagen habitación" class="img-fluid rounded" style="max-height: 300px; object-fit: cover;">
-                      <div class="card-body">
-                        <h5 class="card-title"><?php echo $row['nombre']; ?></h5>
-                        <p class="card-text"><?php echo $row['precio']; ?></p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal<?php echo $row['id_habitacion']; ?>">Ver más</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Modal -->
-                  <div class="modal fade" id="modal<?php echo $row['id_habitacion']; ?>" tabindex="-1" aria-labelledby="modalLabel<?php echo $row['id_habitacion']; ?>" aria-hidden="true">
-                    <div class="modal-dialog modal-xl">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="modalLabel<?php echo $row['id_habitacion']; ?>">Información de la Habitación</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-
-                        <div class="modal-body">
-                          <div class="row text-white">
-                            <!-- Imagen a la izquierda -->
-                            <div class="col-md-4 mb-3">
-                            <img src="img/<?php echo $row['imagen']; ?>" alt="Imagen habitación" class="img-fluid rounded" style="max-height: 300px; object-fit: cover;">
-
-                            </div>
-
-                            <!-- Información a la derecha -->
-                            <div class="col-md-8">
-                              <h3>Descripción</h3>
-                              <p><?php echo $row['dotacion']; ?></p>
-
-                              <div class="row">
-                                <!-- Contactos -->
-                                <div class="col-md-6">
-                                  <h5>Encargado</h5>
-                                  <p><strong>Teléfono:</strong> <?php echo $row['telefono_encargado']; ?></p>
-                                </div>
-
-                                <!-- Mapa + Estado -->
-                                <div class="col-md-6">
-                                  <h5>Ubicación</h5>
-                                  <div style="width: 100%; height: 200px;">
-                                    <iframe
-                                      src="<?php echo $row['mapa']; ?>"
-                                      width="100%"
-                                      height="100%"
-                                      style="border:0;"
-                                      allowfullscreen=""
-                                      loading="lazy"
-                                      referrerpolicy="no-referrer-when-downgrade">
-                                    </iframe>
-                                  </div>
-                                  <br>
-                                  <!-- Disponibilidad solo vista (sin interacción) -->
-                                  <div class="estado-container">
-                                    <label class="switch">
-                                      <input type="checkbox" disabled <?php echo ($row['disponibilidad'] == 1 ? 'checked' : ''); ?>>
-                                      <span class="slider"></span>
-                                    </label>
-                                    <span class="estado-texto"><?php echo ($row['disponibilidad'] == 1 ? 'Disponible' : 'No disponible'); ?></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                <?php endwhile; ?>
-              </div>
-          </div>
-        </div> 
+        <div class="flex flex-wrap md:flex-nowrap items-center gap-20">
+          <?php $pagina = basename($_SERVER['PHP_SELF']); ?>
+<nav class="flex flex-wrap gap-4 text-sm md:text-base">
+  <a href="index.php" class="px-4 py-2 rounded transition hover:bg-indigo-700 <?php echo ($pagina === 'index.php') ? 'border-b-2 border-white' : ''; ?>">🏠 Inicio</a>
+  <a href="galeria.php" class="px-4 py-2 rounded transition hover:bg-indigo-700 <?php echo ($pagina === 'galeria.php') ? 'border-b-2 border-white' : ''; ?>">🖼️ Galería</a>
+  <a href="ubicacion.php" class="px-4 py-2 rounded transition hover:bg-indigo-700 <?php echo ($pagina === 'ubicacion.php') ? 'border-b-2 border-white' : ''; ?>">📍 Ubicación</a>
+  <a href="nosotros.php" class="px-4 py-2 rounded transition hover:bg-indigo-700 <?php echo ($pagina === 'nosotros.php') ? 'border-b-2 border-white' : ''; ?>">👥 Nosotros</a>
+  <a href="contactos.php" class="px-4 py-2 rounded transition hover:bg-indigo-700 <?php echo ($pagina === 'contactos.php') ? 'border-b-2 border-white' : ''; ?>">📞 Contacto</a>
+</nav>
+          <a href="sesion.php" class="ml-2 bg-gradient-to-r from-zinc-950 via-indigo-950 to-blue-950 hover:from-blue-950 hover:via-indigo-950 hover:to-zinc-950 text-white px-5 py-2 rounded-xl font-semibold shadow-lg transition"> Iniciar sesión</a>
+        </div>
       </div>
+    </header>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <section class="pt-28 pb-10 text-center bg-gray-200">
+      <h2 class="text-5xl font-extrabold mb-3 bg-gradient-to-r from-zinc-950 via-indigo-950 to-blue-950 text-transparent bg-clip-text">Reserva tu habitación ideal</h2>
+      <p class="text-gray-600 max-w-3xl mx-auto">En Aloja te ofrecemos mucho más que una habitación. Disfruta de espacios cuidadosamente diseñados que combinan confort, estilo moderno y total privacidad. Ideal para descansar, trabajar o compartir momentos especiales. Tu experiencia de hospedaje comienza aquí.</p>
+    </section>
+
+    <!-- Contenido Principal -->
+    <main class="p-8 text-black bg-gray-200 min-h-screen">
+      <!-- Filtro -->
+      <form method="GET" class="mb-8">
+        <div class="flex flex-col md:flex-row md:items-center gap-4">
+          <input type="text" name="busqueda" placeholder="🔎 Buscar por nombre..." value="<?php echo isset($_GET['busqueda']) ? $_GET['busqueda'] : ''; ?>" class="flex-grow p-3 rounded-lg bg-white border border-gray-400 placeholder-gray-500 min-w-[250px]">
+          <select name="disponibilidad" class="w-48 p-3 rounded-lg bg-white border border-gray-400 text-black">
+            <option value="">🏘️ Todas las habitaciones</option>
+            <option value="1" <?php if(isset($_GET['disponibilidad']) && $_GET['disponibilidad'] === "1") echo "selected"; ?>>✅ Solo disponibles</option>
+            <option value="0" <?php if(isset($_GET['disponibilidad']) && $_GET['disponibilidad'] === "0") echo "selected"; ?>>❌ Solo no disponibles</option>
+          </select>
+          <button type="submit" class="w-fit bg-gradient-to-r from-zinc-950 via-indigo-950 to-blue-950 hover:from-blue-950 hover:via-indigo-950 hover:to-zinc-950 text-white px-4 py-2 rounded-xl font-semibold shadow-lg transition">🔍 Filtrar</button>
+        </div>
+      </form>
+
+      <!-- Habitaciones -->
+      <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <?php while($row = mysqli_fetch_assoc($result)): ?>
+          <div class="bg-white border border-gray-300 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition">
+            <img src="img/<?php echo $row['imagen'] ?? 'default.jpg'; ?>" alt="Imagen habitación" class="w-full h-40 object-cover">
+            <div class="p-4">
+              <h2 class="text-2xl font-bold mb-2 text-gray-900">🛏️ <?php echo $row['nombre']; ?></h2>
+              <p class="text-sm mb-4 text-gray-700">💲 Precio: $<?php echo number_format($row['precio'], 2); ?></p>
+              <button onclick="openModal('<?php echo $row['id_habitacion']; ?>')" class="ml-2 bg-gradient-to-r from-zinc-950 via-indigo-950 to-blue-950 hover:from-blue-950 hover:via-indigo-950 hover:to-zinc-950 text-white px-5 py-2 rounded-xl font-semibold shadow-lg transition">👁️ Ver más</button>
+            </div>
+          </div>
+
+          <!-- Modal personalizado mejorado -->
+          <div id="modal<?php echo $row['id_habitacion']; ?>" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50 hidden">
+            <div class="relative bg-gradient-to-br from-white via-indigo-100 to-blue-100 rounded-3xl shadow-2xl p-8 w-[95%] md:w-[650px] max-h-[90vh] overflow-y-auto animate-fade-in">
+              <button onclick="closeModal('<?php echo $row['id_habitacion']; ?>')" class="absolute top-3 right-4 text-gray-500 hover:text-red-500 text-3xl font-bold leading-none">&times;</button>
+              <img src="img/<?php echo $row['imagen'] ?? 'default.jpg'; ?>" alt="Imagen habitación" class="w-full h-60 object-cover rounded-xl shadow-md mb-6">
+              <h2 class="text-4xl font-extrabold text-indigo-900 mb-4 text-center">🛏️ <?php echo $row['nombre']; ?></h2>
+              <p class="text-lg text-gray-800 mb-4"><span class="font-semibold">💵 Precio:</span> $<?php echo number_format($row['precio'], 2); ?></p>
+              <p class="text-lg text-gray-700 mb-6"><span class="font-semibold">🧾 Dotación:</span> <?php echo $row['dotacion'] ?? 'No especificada'; ?></p>
+
+              <div class="mb-6">
+                <h5 class="text-lg font-semibold text-indigo-900 mb-2">📞 Encargado</h5>
+                <p class="text-gray-700 text-base"><strong>Teléfono:</strong> <?php echo $row['telefono_encargado'] ?? 'No disponible'; ?></p>
+              </div>
+
+              <div class="text-center">
+                <button disabled class="px-6 py-2 rounded-full font-semibold text-sm shadow-md transition cursor-default
+                  <?php echo ($row['disponibilidad'] == 1) 
+                    ? 'bg-green-200 text-green-800 hover:bg-green-300' 
+                    : 'bg-red-200 text-red-800 hover:bg-red-300'; ?>">
+                  <?php echo ($row['disponibilidad'] == 1) ? '✅ Disponible' : '❌ No disponible'; ?>
+                </button>
+              </div>
+            </div>
+          </div>
+        <?php endwhile; ?>
+      </div>
+    </main>
+
+    <script>
+      function openModal(id) {
+        document.getElementById('modal' + id).classList.remove('hidden');
+      }
+
+      function closeModal(id) {
+        document.getElementById('modal' + id).classList.add('hidden');
+      }
+    </script>
   </body>
 </html>

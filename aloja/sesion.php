@@ -1,175 +1,66 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" 
-    crossorigin="anonymous">
-
-    <link rel="stylesheet" href="css/pagina5.css">
-
+    <title>Iniciar sesión - Aloja</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
 
-            .titulo {
-                background-color: rgba(0, 0, 0, 0.289);
-            }
-
-            .titulo h3{
-                font-size: 105px;
-                color: white;
-            }
-            
-            .formulario{
-                background-color: rgba(243, 228, 228, 0.1);
-                width: 400px;
-                height: 400px;
-                margin: 0 auto;
-                margin-top: 15px;
-                padding: 0 auto;
-                border: 1px solid white;
-                border-radius: 20px;
-
-            }
-
-            .formulario h3{
-                margin-top: 20px;
-            }
-
-            .formulario label{
-                margin-top: 30px;
-            }
-
-            .formulario input{
-                width: 355px;
-                height: 30px;
-                margin-left: 20px;
-                margin-right: 20px;
-            }
-
-            .navegador{
-            background-color: rgba(0, 0, 0, 0.289);
-            height: 100%;
-        
-            }
-
-            li{
-                margin-left: 2px;
-                margin-bottom: 70px;
-            }
-            .nav-link{
-                color: rgb(255, 252, 246);
-            }
-            
-            .nav-link:hover{
-                background-color: rgba(55, 55, 230, 0.508);
-                color: white;
-            }
+      body {
+        background: linear-gradient(to bottom right, #0a0f1f, #1c1e2d, #0d1526);
+        background-attachment: fixed;
+      }
     </style>
   </head>
-  <body>
-    <div class="text-center">
-
-        <div class="row">
-          <div class="col-12 titulo">
-            <h3>Bienvenido a Aloja</h3>
-          </div>
+  <body class="min-h-screen flex items-center justify-center text-white relative">
+    <div class="bg-gradient-to-br from-gray-950 via-indigo-950 to-blue-950 text-white shadow-2xl rounded-3xl p-10 w-full max-w-lg">
+      <div class="text-center mb-8">
+        <img src="img/aloja-removebg-preview.png" alt="Logo" class="w-24 h-24 p-2 mx-auto rounded-full border-4 border-white shadow-xl">
+        <h1 class="text-3xl font-extrabold mt-4 bg-gradient-to-r from-zinc-100 via-indigo-200 to-blue-300 text-transparent bg-clip-text"> Bienvenido a Aloja</h1>
+        <p class="text-sm text-indigo-300 mt-2">🔐 Inicia sesión para acceder a tu alojamiento ideal</p>
+      </div>
+      <form action="php/login.php" method="POST" class="space-y-5">
+        <div>
+          <label for="usuario" class="block text-sm font-semibold mb-1 text-white">👤 Usuario</label>
+          <input type="text" name="usuario" id="usuario" placeholder="Ingresa tu usuario" class="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600">
         </div>
-
-
-        <div class="row">
-            <div class="col-lg-2 col-12 ">
-                <ul class="nav d-flex flex-row flex-lg-column navegador">
-
-                    <li class="nav-item">
-                        <img src="" alt="">
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php">inicio</a>
-                    </li>
-                        
-                    <li class="nav-item">
-                        <a class="nav-link" href="galeria.php">Galeria</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="ubicacion.php">Ubicación</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="nosotros.php">Nosotros</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="contactos.php">Contactos</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio de sesión</a>
-                    </li>
-                </ul>
-            </div>
-
-                <div class="col-lg-10 col-12">
-                    
-                    <div class="formulario text-center text-white">
-                        <h3>Inicio Sesión</h3>
-                        <form action="php/login.php" method="POST">
-                            <div class="mb-1">
-                                <label for="usuario" class="form-label">Usuario</label>
-                                <input type="usuario" class="form-control " id="email" name="usuario" aria-describedby="email">
-                                
-                            </div>
-
-                            <div class="mb-2">
-                                <label for="Password" class="form-label">Password</label>
-                                <input type="password" class="form-control p-3" id="Password" name="password">
-                            </div>
-                        
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-                </div>
-            
-
+        <div>
+          <label for="password" class="block text-sm font-semibold mb-1 text-white">🔑 Contraseña</label>
+          <input type="password" name="password" id="password" placeholder="••••••" class="w-full px-4 py-2 rounded-lg border border-gray-700 bg-gray-900 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-600">
         </div>
-
-        <div class="row"></div>
-
-
+        <div class="flex items-center justify-between">
+          <a href="#" class="text-sm text-indigo-300 hover:underline">¿Olvidaste tu contraseña? 🧠</a>
+        </div>
+        <button type="submit" class="w-full py-2 px-4 bg-gradient-to-r from-zinc-200 via-indigo-400 to-blue-500 hover:from-blue-600 hover:to-zinc-300 text-gray-900 font-bold rounded-xl shadow-lg transition duration-300"> Iniciar sesión</button>
+      </form>
+      <p class="mt-6 text-center text-sm text-indigo-300">¿No tienes una cuenta? <a href="#" class="text-indigo-400 hover:underline">📝 Regístrate</a></p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-
     <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("form");
+        form.addEventListener("submit", (e) => {
+          const usuario = document.querySelector("input[name='usuario']").value.trim();
+          const password = document.querySelector("input[name='password']").value.trim();
 
-        
-        document.addEventListener("DOMContentLoaded", () => {
-            const form = document.querySelector("form");
-            form.addEventListener("submit", (e) => {
-                const usuario = document.querySelector("input[name='usuario']").value.trim();
-                const password = document.querySelector("input[name='password']").value.trim();
-
-                if (usuario === "" || password === "") {
-                    e.preventDefault(); // Evita el envío
-                    alert("Por favor, complete todos los campos.");
-                }
-
-                else if (usuario.length < 4) {
-                    e.preventDefault();
-                    alert("El usuario debe tener al menos 4 caracteres.");
-                }   
-                
-                else if (password.length < 6) {
-                    e.preventDefault();
-                    alert("La contraseña debe tener al menos 6 caracteres.");
-                }
-            });
+          if (usuario === "" || password === "") {
+            e.preventDefault();
+            alert("Por favor, complete todos los campos.");
+          } else if (usuario.length < 4) {
+            e.preventDefault();
+            alert("El usuario debe tener al menos 4 caracteres.");
+          } else if (password.length < 6) {
+            e.preventDefault();
+            alert("La contraseña debe tener al menos 6 caracteres.");
+          }
         });
-
+      });
     </script>
-
   </body>
 </html>
